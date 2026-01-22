@@ -1,6 +1,6 @@
 # Hierarchy and MIND in schizophrenia spectrum disorders (SSD)
 
-This repository contains code and data created in support of the project García-San-Martín, N.; Bethlehem, R. AI; Sebenius, I. et al. *"Long-term brain structural similarity is associated with cortical hierarchy and psychiatric symptoms in schizophrenia spectrum disorders"* medRxiv (2026). All code was written in Matlab, R, and Python. Folders, files, and first steps are described below.
+This repository contains code and data created in support of the project García-San-Martín, N.; Bethlehem, R. AI; Sebenius, I. et al. *"Long-term morphometric similarity gradients relate to cortical hierarchy and psychiatric symptoms in schizophrenia"* medRxiv (2026). All code was written in Matlab, R, and Python. Folders, files, and first steps are described below.
 
 ## **First steps**
 
