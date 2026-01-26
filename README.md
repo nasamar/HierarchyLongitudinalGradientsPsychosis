@@ -5,7 +5,7 @@ This repository contains code and data created in support of the project García
 
 ## **Data**
 
-- The `brain maps` folder contains the hierarchical and schizophrenia epicenter maps employed in this study.
+- The `brain maps` folder contains the hierarchical and schizophrenia epicenter maps employed in this study, which were obtained using neuromaps toolbox, available at https://github.com/netneurolab/neuromaps.
   - The `sensorimotor-association (S-A) regional ranking` file was derived from https://doi.org/10.1016/j.neuron.2021.06.016.
   - The map of `evolutionary expansion`, which represents the ratio of the surface area in humans to that of macaque, was derived from https://www.pnas.org/doi/full/10.1073/pnas.1001229107.
   - The `functional gradient` corresponds to the first gradient of functional connectivity derived from diffusion map embedding and was obtained from https://www.pnas.org/doi/10.1073/pnas.1608282113.
