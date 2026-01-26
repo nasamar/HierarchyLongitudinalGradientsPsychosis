@@ -2,13 +2,6 @@
 
 This repository contains code and data created in support of the project García-San-Martín, N.; Bethlehem, R. AI; Sebenius, I. et al. *"Long-term morphometric similarity gradients relate to cortical hierarchy and psychiatric symptoms in schizophrenia"* medRxiv (2026). All code was written in Matlab, R, and Python. Folders, files, and first steps are described below.
 
-## **First steps**
-
-1.	Download `Code` folder, which contains the scripts and functions used for the analyses.
-
-2.	Download `Data` folder, which contains data used to run the analyses and data derived from them.
-
-3.	Storage your volume and centile data in `volumes` and `centiles` subfolders.
 
 ## **Data**
 
@@ -33,19 +26,21 @@ The `Data` folder contains all the data required for running the analyses. Here 
 
 The `Code` folder contains all the code required for running the analyses and generate data and figures. All scripts are designed to be sequentially executed. Don't forget to change the location variable regularly. 
 
--	[MIND_01_MIND.py](Code/MIND_01_MIND.py) – computes MIND networks from FreeSurfer directory (by default stored in the surf/ folder). It returns a .csv file for each individual and storages it in `MIND_networks_PAFIP` folder.
-
--	[MIND_02_degree_and_edges_PAFIP.m](Code/MIND_02_degree_and_edges_PAFIP.m) – calculates for each HC and FEP individual the edges, degrees, and their effect sizes from MIND networks (`MIND_networks_PAFIP` folder). The results are stored in `degree` and `edges` folders. It returns a .csv file for each type (degree, effsizes_degree, edges, effsizes_edges) and for each clinical outcome (cognition, BPRS, SAPS, SANS) in the effect sizes cases.
+-	[MIND_long_01_MIND.py](Code/MIND_01_MIND.py) – computes MIND networks from FreeSurfer directory (by default stored in the surf/ folder). It returns a .csv file for each individual and storages it in `MIND_networks_PAFIP` folder.
+  
+-	[MIND_long_02_COMBATLS.R](Code/MIND_long_02_COMBATLS.R) - 
+  
+-	[MIND_long_03_degree_and_edges_PAFIP_COMBATLS.m](Code/MIND_long_03_degree_and_edges_PAFIP_COMBATLS.m) – calculates for each HC and FEP individual the edges and degrees from MIND networks (`MIND_networks_PAFIP` folder). The results are stored in `degree` and `edges` folders. It returns a .csv file for each type (degree, edges).
 
 -	[MIND_03_brain_mapping.R](Code/MIND_03_brain_mapping.R) – generates the regional brain maps of: (1) MIND degree of HC and FEP, and (2) effect sizes of MIND degree from the .csv files previously generated.
 
--	[MIND_04_brain_mapping_3D.m](Code/MIND_04_brain_mapping_3D.m) – generates the 3D spatial representation of the effect sizes of MIND edges and degrees from the .csv files previously generated.
+-	[MIND_long_04_gradients.m](Code/MIND_long_04_gradients.m) – generates the 3D spatial representation of the effect sizes of MIND edges and degrees from the .csv files previously generated.
 
--	[MIND_05_maturational_features.m](Code/MIND_05_maturational_features.m) – computes the associations between (1) MIND and centiles, (2) MIND and psychosis co-vulnerability, (3) hierarchical neurodevelopment and MIND and centiles, (4) peaks of volume/velocity and MIND and centiles.
+-	[MIND_long_05_hierarchy_SCZ_brain_maps.m](Code/MIND_long_05_hierarchy_SCZ_brain_maps.m) – computes the associations between (1) MIND and centiles, (2) MIND and psychosis co-vulnerability, (3) hierarchical neurodevelopment and MIND and centiles, (4) peaks of volume/velocity and MIND and centiles.
 
--	[MIND_06_connectivity_to_epicenters.m](Code/MIND_06_connectivity_to_epicenters.m) – computes the regions connected to epicenters of the disease. It returns a .csv file for each dignosis (HC/FEP) and clinical outcome.
+-	[MIND_long_06_cortical_MIND_association_maps.m](Code/MIND_long_06_cortical_MIND_association_maps.m) – computes the regions connected to epicenters of the disease. It returns a .csv file for each dignosis (HC/FEP) and clinical outcome.
 
--	[MIND_07_connectivity_to_epicenter_mapping.R](Code/MIND_07_connectivity_to_epicenter_mapping.R) – generates the regional brain maps of HC and FEP connectivity to epicenters from the .csv files previously generated.
+-	[MIND_long_07_subcortical_MIND_association_maps.m](Code/MIND_long_07_subcortical_MIND_association_maps.m) – generates the regional brain maps of HC and FEP connectivity to epicenters from the .csv files previously generated.
 
 
 ```matlab
