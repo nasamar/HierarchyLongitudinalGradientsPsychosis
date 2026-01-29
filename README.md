@@ -50,4 +50,4 @@ If you use this software, please cite the following paper and software:
 
 - García-San-Martín, N., Bethlehem, R.A., Sebenius, I. et al. Long-term morphometric similarity gradients relate to cortical hierarchy and psychiatric symptoms in schizophrenia. medRxiv (2026). https://doi.org/
   
-- Natalia-García-San-Martín. NeuroimagingBrainNetworks/HierarchyLongitudinalMINDGradientsPsychosis: v1.0.0-alpha. Zenodo https://doi.org/ (2026).
+- Natalia-García-San-Martín. NeuroimagingBrainNetworks/HierarchyLongitudinalMINDGradientsPsychosis: v1.0.0-alpha. Zenodo https://doi.org/10.5281/zenodo.18416489 (2026).
