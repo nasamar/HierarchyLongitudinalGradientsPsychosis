@@ -44,9 +44,9 @@ names_DK = replace(replace(names_DK,'R-','rh_'),'L-','lh_');
 
 % Interpolation results
 var = 'degrees';
-% for period = {'_baseline'}
+% for period = {''}
 for period = {'_baseline',''}
-    % for cognition = {''}
+    % for cognition = {'_BPRS'}
     for cognition = {'','_BPRS'}
 
         variable = [period{:},cognition{:}];
@@ -54,21 +54,22 @@ for period = {'_baseline',''}
         if ~contains(variable,{'BPRS'}) 
             if contains(variable,'baseline')
                 x_vars = {'dx1'};
-                % x_vars = {'Age_inclusion','Sex1','eTIV','mean_euler'};
+                x_vars = {'Age_inclusion','Sex1','eTIV','mean_euler'};
                 
             else
                 x_vars = {'dx1','Treatment_Time','dx1_Treatment_Time','CPZ_equivalent','CPZ_equivalent_Treatment_Time'};
                 % x_vars = {'Treatment_Time','CPZ_equivalent','CPZ_equivalent_Treatment_Time'}; % FEP
                 % x_vars = {'Treatment_Time'}; % CN
-                % x_vars = {'Age_inclusion','Sex1','eTIV','mean_euler','protocol_Change15'};
+                x_vars = {'Age_inclusion','Sex1','eTIV','mean_euler','protocol_Change15'};
 
             end
 
         elseif contains(variable,'baseline') 
             x_vars = {['global_',var]};
+            x_vars = {'Age_inclusion','Sex1','eTIV','mean_euler'};
         else
             x_vars = {['',var],'Treatment_Time',[var,'_Treatment_Time'],'CPZ_equivalent','CPZ_equivalent_Treatment_Time'};
-            
+            x_vars = {'Age_inclusion','Sex1','eTIV','mean_euler'};            
         end
 
         
@@ -77,24 +78,28 @@ for period = {'_baseline',''}
         Interpolation_Results = readtable([location,'Code\MATLAB\Connectivity\Longitudinal\degrees\',parcellation,'\InterpolationResults_',var,variable,'.csv'],opts);
         
 
-        % poolobj = gcp('nocreate');
-        % delete(poolobj);
-        % parpool(length(x_vars))
-        
-        var_partial = mean(degree_68_CN{contains(degree_68_CN.Properties.RowNames,'_001'),:})';
-        var_name = 'degree CN';
+        Interpolation_Results_degrees = readtable([location,'Code\MATLAB\Connectivity\Longitudinal\degrees\aparc_500_sym\InterpolationResults_degrees',period{:},cognition{:},'.csv'],opts);
+        Interpolation_Results_gradients_G1 = readtable([location,'Code\MATLAB\Connectivity\Longitudinal\gradients_normalized\aparc_500_sym\COMBATLS_covars',normalization,'\',residual_or_raw,'\InterpolationResults_gradients_G1',period{:},cognition{:},'.csv'],opts);
+        Interpolation_Results_gradients_G2 = readtable([location,'Code\MATLAB\Connectivity\Longitudinal\gradients_normalized\aparc_500_sym\COMBATLS_covars',normalization,'\',residual_or_raw,'\InterpolationResults_gradients_G2',period{:},cognition{:},'.csv'],opts);
 
-        lim_max = max(max(Interpolation_Results{:,cellfun(@(x) ['res_complete_' x], x_vars, 'UniformOutput', false)}));
-        lim_min = min(min(Interpolation_Results{:,cellfun(@(x) ['res_complete_' x], x_vars, 'UniformOutput', false)}));
-        
-        if strcmp(period,'_baseline') 
-            if ~contains(cognition,{'_BPRS'})
-                lim_max = 4;
-                lim_min = -4.1;
-            else
-                lim_max = 5.14;
-                lim_min = -6.06;
-            end
+        lim_max_degrees = max(max(Interpolation_Results_degrees{:,cellfun(@(x) ['res_complete_' x], replace(x_vars,var,'degrees'), 'UniformOutput', false)}));
+        lim_min_degrees = min(min(Interpolation_Results_degrees{:,cellfun(@(x) ['res_complete_' x], replace(x_vars,var,'degrees'), 'UniformOutput', false)}));
+        lim_max_G1 = max(max(Interpolation_Results_gradients_G1{:,cellfun(@(x) ['res_complete_' x], replace(x_vars,var,'gradients'), 'UniformOutput', false)}));
+        lim_min_G1 = min(min(Interpolation_Results_gradients_G1{:,cellfun(@(x) ['res_complete_' x], replace(x_vars,var,'gradients'), 'UniformOutput', false)}));
+        lim_max_G2 = max(max(Interpolation_Results_gradients_G2{:,cellfun(@(x) ['res_complete_' x], replace(x_vars,var,'gradients'), 'UniformOutput', false)}));
+        lim_min_G2 = min(min(Interpolation_Results_gradients_G2{:,cellfun(@(x) ['res_complete_' x], replace(x_vars,var,'gradients'), 'UniformOutput', false)}));
+
+
+        if strcmp(period,'_baseline') | contains(cognition,{'_BPRS'})  
+            lim_min = min([lim_min_degrees,lim_min_G1,lim_min_G2]);
+            lim_max = max([lim_max_degrees,lim_max_G1,lim_max_G2]);
+            
+        elseif contains(var,{'degrees'})
+            lim_max = lim_max_degrees;
+            lim_min = lim_min_degrees;
+        else
+            lim_max = max([lim_max_G1,lim_max_G2]);
+            lim_min = min([lim_min_G1,lim_min_G2]);            
         end
 
         
@@ -104,8 +109,6 @@ for period = {'_baseline',''}
 
             % Interpolation_Results{isnan(Interpolation_Results{:,['res_',x_var{:}]}),['res_',x_var{:}]} = 0;
 
-            % if contains(x_var{:},'dx1') && ~contains(x_var{:},'Treatment_Time')
-            % if contains(variable,'baseline') 
             figure('Position', [488   242   560  200])
                plot_subcortical(Interpolation_Results{:,['res_complete_',x_var{:}]}',...
                     'ventricles','False',...
@@ -121,12 +124,9 @@ for period = {'_baseline',''}
             %         'label_text',['InterpolationResults_',var,variable,x_var{:}]);
             %     colorbar_white_centered([lim_min lim_max])                
                 
-            % end
             
         end
         
     end
 
 end
-
-
