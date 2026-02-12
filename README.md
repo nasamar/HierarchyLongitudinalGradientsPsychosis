@@ -16,7 +16,7 @@ This repository contains code and data created in support of the project García
 
 The [`Code`](Code/) folder contains all the code required for running the analyses and generate data and figures. All scripts are designed to be sequentially executed. Don't forget to change the location variable regularly. 
 
--	The code used to compute cortical MIND networks is available at https://github.com/isebenius/MIND and corresponds to [MIND_long_01_MIND.py](Code/MIND_long_01_MIND.py). It computes MIND networks from FreeSurfer directory (by default stored in the surf/ folder) and returns a .csv file for each individual.
+-	The code used to compute cortical MIND networks is available at https://github.com/isebenius/MIND and corresponds to [MIND_long_01_cortical_MIND.py](Code/MIND_long_01_cortical_MIND.py). The code used to compute subcortical MIND networks was derived from https://doi.org/10.21203/rs.3.rs-6900305/v1 and corresponds to [MIND_long_01_subcortical_MIND.py](Code/MIND_long_01_subcortical_MIND.py). Both codes compute MIND networks from FreeSurfer directory (by default stored in the surf/ folder) and return a .csv file for each individual. 
   
 -	[MIND_long_02_COMBATLS.R](Code/MIND_long_02_COMBATLS.R) - applies the COMBATLS site harmonization method to MIND networks.
   
